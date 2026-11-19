@@ -171,26 +171,52 @@ img { max-width: 100%; }
 @media (min-width: 761px) {
   /* Portrait stands on the bottom edge of the hero, head near the top */
   .hero { align-items: stretch; min-height: 620px; }
-  .hero-layout { align-self: stretch; margin: 0 auto; align-items: end; gap: 40px; }
+  .hero-layout { align-self: stretch; margin: 0 auto; align-items: center; gap: 40px; }
   .hero-layout > .hero-content { align-self: center; }
-  .hero-layout > div:last-child { align-self: end; display: flex !important; justify-content: center; align-items: flex-end; }
-  .hero-layout > div:last-child .hero-content { padding: 0 !important; display: flex; align-items: flex-end; justify-content: center; }
+  .hero-layout > div:last-child { align-self: center; display: flex !important; justify-content: center; align-items: center; }
+  .hero-layout > div:last-child .hero-content { padding: 0 !important; display: flex; align-items: center; justify-content: center; }
   .hero-layout > div:last-child img {
     display: block;
     width: auto !important;
     max-width: 100%;
-    height: clamp(380px, 62vh, 520px);
+    height: clamp(460px, 74vh, 620px);
     object-fit: contain;
-    object-position: center bottom;
-    margin: 0;
+    object-position: center center;
+    margin: 0 0 40px;
   }
 }
 @media (max-width: 760px) {
   /* Portrait first, centered at the top of the page */
   .hero-layout > div:last-child .hero-content { padding: 28px 0 0 !important; }
   .hero-layout > div:last-child img {
-    width: min(60vw, 230px) !important;
+    width: min(70vw, 280px) !important;
     height: auto !important;
     object-fit: contain;
   }
 }
+
+/* ===== H2 heading animation: text wipes in left-to-right, underline draws ===== */
+.js h2.reveal {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s cubic-bezier(.65, 0, .35, 1);
+}
+.js h2.reveal.in { clip-path: inset(0 0 0 0); }
+.js h2.reveal::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 3px;
+  margin-top: 12px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+  transition: width .9s ease .55s;
+}
+.js h2.reveal.in::after { width: 90px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js h2.reveal { clip-path: none; transition: none; }
+  .js h2.reveal::after { width: 90px; transition: none; }
+}
+@media print { .js h2.reveal { clip-path: none !important; } .js h2.reveal::after { width: 90px; } }
