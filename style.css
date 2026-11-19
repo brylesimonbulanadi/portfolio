@@ -203,20 +203,11 @@ img { max-width: 100%; }
   transition: clip-path 1s cubic-bezier(.65, 0, .35, 1);
 }
 .js h2.reveal.in { clip-path: inset(0 0 0 0); }
-.js h2.reveal::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 3px;
-  margin-top: 12px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--cyan), transparent);
-  transition: width .9s ease .55s;
-}
-.js h2.reveal.in::after { width: 90px; }
 
 @media (prefers-reduced-motion: reduce) {
   .js h2.reveal { clip-path: none; transition: none; }
-  .js h2.reveal::after { width: 90px; transition: none; }
-}
-@media print { .js h2.reveal { clip-path: none !important; } .js h2.reveal::after { width: 90px; } }
+  @media print { .js h2.reveal { clip-path: none !important; } }
+
+/* No underline lines under section text */
+.accent-line { display: none !important; }
+h2::after { content: none !important; }
