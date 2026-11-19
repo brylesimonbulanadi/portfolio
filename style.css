@@ -8,8 +8,9 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
 ::-webkit-scrollbar-thumb { background: #1d4560; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
 
-/* Header gets a soft glow line */
-header { box-shadow: 0 8px 30px rgba(0,0,0,.25); }
+/* Header: fixed so it always stays at the top while scrolling */
+header { position: fixed; top: 0; left: 0; right: 0; z-index: 30; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
+body { padding-top: 68px; }
 .brand { font-size: 1.05rem; }
 
 /* Hero: bigger glow, gradient name, framed portrait */
@@ -97,10 +98,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan-light); ou
 @media print { #progress, #to-top, #lightbox { display: none !important; } .js .reveal { opacity: 1 !important; transform: none !important; } }
 
 /* ===== Mobile ===== */
-html, body { overflow-x: hidden; }
+html { overflow-x: clip; }
+body { overflow-x: clip; }
 img { max-width: 100%; }
 @media (max-width: 900px) { .hero-layout, .about-grid { gap: 28px; } }
 @media (max-width: 760px) {
+  body { padding-top: 62px; }
   .container { width: calc(100% - 28px); }
   .hero-layout { display: flex; flex-direction: column-reverse; align-items: center; gap: 8px; text-align: center; }
   .hero-layout > div:last-child { width: 100%; justify-content: center !important; }
